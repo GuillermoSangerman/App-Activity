@@ -139,8 +139,14 @@ export function deleteFila(id) {
 }
 export function enviarActividad(id) {
     actividadEditada = findElement(id)
+    editForm.elements.titulo.value = actividadEditada.titulo
+    editForm.elements.organizacion.value = actividadEditada.organizacion
+    editForm.elements.responsable.value = actividadEditada.responsable
+    editForm.elements.numero.value = actividadEditada.numero
+    editForm.elements.contenido.value = actividadEditada.contenido
+    editForm.elements.fecha.value = actividadEditada.fecha
     let nuevoNumero = actividadEditada.numero
-    let abrirEnlace = `<a href="https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale"></a>`
+    //let abrirEnlace = `<a href="https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale"></a>`
     window.open(`https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale`)
 }
 
