@@ -75,13 +75,13 @@ export function salvarEdition(event) {
     event.preventDefault()
     const formData = new FormData(editForm)
 
-    actividadEditada.content = formData.get('contenido')
+    actividadEditada.contenido = formData.get('contenido')
     actividadEditada.titulo = formData.get('titulo')
     actividadEditada.organizacion = formData.get('organizacion')
     actividadEditada.responsable = formData.get('responsable')
     actividadEditada.numero = formData.get('numero')
-
-
+    actividadEditada.contenido = formData.get('contenido')
+    actividadEditada.fecha = getDate()
 
     cargarContedido(baseDeDatos)
     editForm.reset()
@@ -98,6 +98,7 @@ export function nuevaActividad(event) {
     const responsable = formData.get('responsable')
     const numero = formData.get('numero')
     const contenido = formData.get('contenido')
+    console.log(contenido);
     const fecha = getDate()
     const nuevo = {
         id: baseDeDatos[baseDeDatos.length - 1]?.id + 1 || 1,
