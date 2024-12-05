@@ -1,6 +1,14 @@
+if (localStorage.getItem('funval') === null) {
+    localStorage.setItem("funval", JSON.stringify([]))
+}
+
+const baseDeLosDatos = JSON.parse(localStorage.getItem('funval'))
+console.log(baseDeLosDatos);
+
 import { baseDeDatos } from "./data.js";
 import { fechaActual, getDate } from "./fechaActual.js";
 import { categorias } from "./data.js";
+
 fechaActual()
 const listaTotal = document.querySelector('#lista_total')
 const actividadesLista = document.querySelector('#actividad_list')
@@ -13,6 +21,8 @@ const cancelButton = document.querySelector('#edit_form button[type="button"]')
 const actividadList = document.querySelector('#actividad_list')
 const modalClose = document.querySelector('#close')
 const modalCloseEdit = document.querySelector('#close_edit')
+
+
 let actividadEditada = {}
 function organizacionesLista() {
     listaTotal.innerHTML = ""
@@ -80,7 +90,6 @@ export function salvarEdition(event) {
     actividadEditada.organizacion = formData.get('organizacion')
     actividadEditada.responsable = formData.get('responsable')
     actividadEditada.numero = formData.get('numero')
-    actividadEditada.contenido = formData.get('contenido')
     actividadEditada.fecha = getDate()
 
     cargarContedido(baseDeDatos)
@@ -98,7 +107,6 @@ export function nuevaActividad(event) {
     const responsable = formData.get('responsable')
     const numero = formData.get('numero')
     const contenido = formData.get('contenido')
-    console.log(contenido);
     const fecha = getDate()
     const nuevo = {
         id: baseDeDatos[baseDeDatos.length - 1]?.id + 1 || 1,
@@ -113,6 +121,7 @@ export function nuevaActividad(event) {
     agregarForm.reset()
     cargarContedido(baseDeDatos)
     activarFormulario()
+    localStorage.setItem('funval', JSON.stringify(baseDeLosDatos))
 }
 function editActividad(id) {
     actividadEditada = findElement(id)
@@ -140,15 +149,18 @@ export function deleteFila(id) {
 }
 export function enviarActividad(id) {
     actividadEditada = findElement(id)
-    editForm.elements.titulo.value = actividadEditada.titulo
-    editForm.elements.organizacion.value = actividadEditada.organizacion
-    editForm.elements.responsable.value = actividadEditada.responsable
-    editForm.elements.numero.value = actividadEditada.numero
-    editForm.elements.contenido.value = actividadEditada.contenido
-    editForm.elements.fecha.value = actividadEditada.fecha
+    let tituloDeActividad = actividadEditada.titulo
+    let organicaionQueSirve = actividadEditada.organizacion
+    let responsableDelEvento = actividadEditada.responsable
+    let fechaDeCreacion = actividadEditada.fecha
     let nuevoNumero = actividadEditada.numero
+    let contenidoATratar = actividadEditada.contenido
     //let abrirEnlace = `<a href="https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale"></a>`
-    window.open(`https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale`)
+    window.open(`https://wa.me/52${nuevoNumero}?text=Titulo de la actividad: ${tituloDeActividad},
+                                                     Que organización se encarga: ${organicaionQueSirve},
+                                                     Responsable: ${responsableDelEvento},
+                                                     Fecha del evento: ${fechaDeCreacion},
+                                                     De que se trata: ${contenidoATratar}`)
 }
 
 function buttonsAction(event) {
