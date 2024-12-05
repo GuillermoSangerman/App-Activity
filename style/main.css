@@ -15,7 +15,7 @@
 }
 .fecha{
     background-color: #eae2d6 ;
-    font-size: 7px !important;
+    font-size: 10px !important;
     font-weight: bold;
     color: #2e2300 !important;
 }
@@ -24,12 +24,15 @@
 }
 #fecha_form_actualizar{
     background-color: #eae2d6 !important;
-    font-size: .8rem !important;
+    font-size: 10px !important;
     font-weight: bold !important;
     color: #2e2300 !important;
 }
 #add{
     background-color: #2e2300;
+    color: white;
+    height: 30px;
+    border-radius: 2rem;
 }
 .desplazamientoDeLista{
     background-color: #eae2d6;
@@ -37,13 +40,34 @@
 .contenedor_listado{
     background-color: #f8f1e5;
 }
+.editar_compartir{
+    background-color: #2e2300;
+    color: #f1f1f2;
+    height: 2rem;
+    border-radius: 2rem;
+    padding: 8px;
+}
 .editar_button{
     background-color: #867666;
     color: white;
 }
 .eliminar_button{
     background-color: #c0b2b5;
+    color: black;
+}
+#edit{
+    background-color: #867666;
     color: white;
+    height: 2rem;
+    border-radius: 2rem;
+    padding: 8px;
+}
+#eliminar{
+    background-color: #c0b2b5;
+    color: black;
+    height: 2rem;
+    border-radius: 2rem;
+    padding: 8px;
 }
 .navbar_form{
     background-color: #f1f1f2 !important;

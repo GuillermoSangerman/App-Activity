@@ -17,7 +17,7 @@ let actividadEditada = {}
 function organizacionesLista() {
     listaTotal.innerHTML = ""
     categorias.forEach(element => {
-        const template_organizaciones = `<li class="list-group text-dark" id="${element.id}">${element.organizacion}</li>`
+        const template_organizaciones = `<li class="list-group text-dark mt-2" id="${element.id}">${element.organizacion}</li>`
         listaTotal.innerHTML += template_organizaciones
     });
 }
@@ -26,7 +26,7 @@ organizacionesLista()
 function cargarContedido(organizaciones) {
     actividadesLista.innerHTML = ""
     organizaciones.forEach(element => {
-        //let numeroDeTelefono = `https://wa.me/${element.numero}`
+
         let template_contenido = `<div">
                         <div id="${element.id}" class="d-flex justify-content-around align-items-md-center flex-grow-1 info flex-row flex-md-row">
                             <h3 class="fs-6 encabezados">${element.organizacion}</h3>
@@ -35,12 +35,16 @@ function cargarContedido(organizaciones) {
                             <h6 class="fs-6 encabezados">${element.fecha}</h6>
                         </div>
                         <div id="${element.id}" class="action d-flex justify-content-end gap-3 flex-grow-1">
-                            <button  id="edit" class="btn editar_button btn-sm">
-                                Editar
-                            </button>
-                            <button id="eliminar" class="btn eliminar_button btn-sm rounded-5">
-                                Eliminar
-                            </button>
+                            <svg id="enviar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 editar_compartir">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+</svg>
+<svg id="edit" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+</svg>
+<svg id="eliminar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+</svg>
+
                         </div>
                     </div>
                     <hr>`
@@ -114,7 +118,7 @@ function editActividad(id) {
     editForm.elements.titulo.value = actividadEditada.titulo
     editForm.elements.organizacion.value = actividadEditada.organizacion
     editForm.elements.responsable.value = actividadEditada.responsable
-    //editForm.elements.numero.value = actividadEditada.numero
+    editForm.elements.numero.value = actividadEditada.numero
     editForm.elements.contenido.value = actividadEditada.contenido
     editForm.elements.fecha.value = actividadEditada.fecha
     activarEditForm()
@@ -133,16 +137,33 @@ export function deleteFila(id) {
     baseDeDatos.splice(index, 1) // eliminar post del array untilizando splice
     cargarContedido(baseDeDatos) // volver a cargar los post despues de elminar.
 }
+export function enviarActividad(id) {
+
+
+    actividadEditada = findElement(id)
+    let nuevoNumero = actividadEditada.numero
+    let abrirEnlace = `<a href="https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale"></a>`
+    console.log(actividadEditada);
+    console.log(nuevoNumero);
+    console.log(abrirEnlace);
+
+
+
+}
+
 function buttonsAction(event) {
 
-    let target = event.target // obtener etique sobre la que se hizo click
+    let target = event.target
     console.log(target);
-    let id = parseInt(target.closest('div').id)// id del post sobre el cual se hizo click
+    let id = parseInt(target.closest('div').id)
     console.log(id);
-    if (target.id === 'eliminar') { // validar si se hizo click sobre el boton delete
-        deleteFila(id) // llamar a la function de eliminar el post
-    } else if (target.id === 'edit') { // validar si se hizo click sobre el boton edit
-        editActividad(id) // llamar a la function de editar el post
+    if (target.id === 'eliminar') {
+        deleteFila(id)
+    } else if (target.id === 'edit') {
+        editActividad(id)
+    } else if (target.id === 'enviar') {
+        enviarActividad(id)
+
     }
 
 }

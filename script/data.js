@@ -15,8 +15,8 @@ export const baseDeDatos = [
         titulo: "Peliculas",
         organizacion: "Hombres Jovenes",
         responsable: "Ezio Auditore",
-        numero: 521234567890 ,
-        fecha:"Martes-3/12/2024",
+        numero: 9511921999 ,
+        fecha:"3/12/2024",
         contenido: "Es una actividad para nuestra edificacion" 
     },
     {
@@ -24,8 +24,8 @@ export const baseDeDatos = [
         titulo: "Visita Templo",
         organizacion: "Sacerdocio",
         responsable: "Obispo",
-        numero: 521234567890 ,
-        fecha:"Martes-24/12/2024",
+        numero: 1234567890 ,
+        fecha:"24/12/2024",
         contenido:"Es una actividad para nuestra edificacion" 
     },
     {
@@ -33,8 +33,8 @@ export const baseDeDatos = [
         titulo: "Visita Templo",
         organizacion: "Soc. Socorro",
         responsable: "Obispo",
-        numero: 521234567890 ,
-        fecha:"Miercoles-25/12/2024",
+        numero: 1234567890 ,
+        fecha:"25/12/2024",
         contenido:"Es una actividad para nuestra edificacion" 
     },
 ]
