@@ -138,21 +138,13 @@ export function deleteFila(id) {
     cargarContedido(baseDeDatos) // volver a cargar los post despues de elminar.
 }
 export function enviarActividad(id) {
-
-
     actividadEditada = findElement(id)
     let nuevoNumero = actividadEditada.numero
     let abrirEnlace = `<a href="https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale"></a>`
-    console.log(actividadEditada);
-    console.log(nuevoNumero);
-    console.log(abrirEnlace);
-
-
-
+    window.open(`https://wa.me/52${nuevoNumero}?text=I'm%20interested%20in%20your%20car%20for%20sale`)
 }
 
 function buttonsAction(event) {
-
     let target = event.target
     console.log(target);
     let id = parseInt(target.closest('div').id)

@@ -33,7 +33,7 @@ export const baseDeDatos = [
         titulo: "Visita Templo",
         organizacion: "Soc. Socorro",
         responsable: "Obispo",
-        numero: 1234567890 ,
+        numero: 6331040032 ,
         fecha:"25/12/2024",
         contenido:"Es una actividad para nuestra edificacion" 
     },
