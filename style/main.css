@@ -34,6 +34,12 @@
     height: 30px;
     border-radius: 2rem;
 }
+#back{
+    background-color: #2e2300;
+    color: white;
+    height: 30px;
+    border-radius: 2rem;
+}
 .desplazamientoDeLista{
     background-color: #eae2d6;
 }
