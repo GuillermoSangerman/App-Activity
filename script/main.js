@@ -1,16 +1,9 @@
-
-
-import { baseDeDatos } from "./data.js";
-import { fechaActual, getDate } from "./fechaActual.js";
-import { categorias } from "./data.js";
+import { fechaActual} from "./fechaActual.js";
 
 if (localStorage.getItem('funval') === null) {
     localStorage.setItem('funval', JSON.stringify([]))
 }
-
-
 const baseDatos = JSON.parse(localStorage.getItem('funval'));
-// console.log(baseDeDatos);
 
 fechaActual()
 const listaTotal = document.querySelector('#lista_total')
@@ -27,16 +20,8 @@ const modalCloseEdit = document.querySelector('#close_edit')
 const botonBack = document.querySelector('#back')
 
 
+
 let actividadEditada = {}
-
-function organizacionesLista() {
-    listaTotal.innerHTML = ""
-    categorias.forEach(element => {
-        const template_organizaciones = `<li class="list-group text-dark mt-2" id="${element.id}">${element.organizacion}</li>`
-        listaTotal.innerHTML += template_organizaciones
-    });
-}
-
 
 function activarFormulario() {
 
@@ -100,6 +85,7 @@ export function nuevaActividad(event) {
     console.log(baseDatos);
     agregarForm.reset()
     cargarContedido(nuevo)
+    organizacionesLista(baseDatos)
     localStorage.setItem('funval', JSON.stringify(baseDatos))
     fechaActual()
     activarFormulario()
@@ -107,7 +93,7 @@ export function nuevaActividad(event) {
 }
 function cargarContedido({ id, titulo, organizacion, responsable, fecha }) {
 
-    let template_contenido = `<div">
+    let template_contenido = `<div>
                         <div id="${id}" class="d-flex justify-content-around align-items-md-center flex-grow-1 info flex-row flex-md-row">
                             <h3 class="fs-6 encabezados">${organizacion}</h3>
                             <h3 class="fs-6 encabezados">${titulo}</h3>
@@ -179,7 +165,25 @@ export function enviarActividad(id) {
                                                      Fecha del evento: ${fechaDeCreacion},
                                                      De que se trata: ${contenidoATratar}`)
 }
+function listaDeCategorias(categoria) {
+    const template_organizaciones = `<li class="list-group text-dark mt-2" id="${categoria.id}">${categoria.organizacion}</li>`
+    listaTotal.innerHTML += template_organizaciones
+}
+function organizacionesLista(organi) {
+    listaTotal.innerHTML = ""
+    const valores = new Set();
+    organi.forEach(elementos => {
+        if (valores.has(elementos.organizacion)) {
+            console.log("se agrego");
+        } else {
+            valores.add(elementos.organizacion)
+            listaDeCategorias(elementos)
+            console.log(elementos.organizacion);
+        }
+    });
+}
 
+organizacionesLista(baseDatos)
 function buttonsAction(event) {
     let target = event.target
     let id = parseInt(target.closest('div').id)
